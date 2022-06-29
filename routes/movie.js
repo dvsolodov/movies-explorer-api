@@ -4,7 +4,7 @@ const {
   getMovies,
   createMovie,
   deleteMovie,
-} = require('../controllers/users');
+} = require('../controllers/user');
 const { urlPattern } = require('../utils/constants');
 
 const router = express.Router();

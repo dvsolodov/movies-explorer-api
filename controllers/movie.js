@@ -17,11 +17,33 @@ const getMovies = (req, res, next) => {
 
 const createMovie = (req, res, next) => {
   const {
-    country, director, duration, year, owner = req.user._id, description, image, trailer, nameRU, nameEN, thumbnail, movieId
+    country,
+    director,
+    duration,
+    year,
+    owner = req.user._id,
+    description,
+    image,
+    trailer,
+    nameRU,
+    nameEN,
+    thumbnail,
+    movieId,
   } = req.body;
 
   Movie.create({
-    country, director, duration, year, owner, description, image, trailer, nameRU, nameEN, thumbnail, movieId
+    country,
+    director,
+    duration,
+    year,
+    owner,
+    description,
+    image,
+    trailer,
+    nameRU,
+    nameEN,
+    thumbnail,
+    movieId,
   })
     .then((movie) => {
       if (!movie) {
@@ -38,7 +60,6 @@ const createMovie = (req, res, next) => {
       return next(err);
     });
 };
-
 
 const deleteMovie = (req, res, next) => {
   const { movieId } = req.params;

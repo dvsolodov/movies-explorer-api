@@ -4,7 +4,7 @@ const {
   getUser,
   getUserById,
   updateUser,
-} = require('../controllers/users');
+} = require('../controllers/user');
 const { emailPattern } = require('../utils/constants');
 
 const router = express.Router();

@@ -10,10 +10,10 @@ const { errors } = require('celebrate');
 const NotFoundError = require('./errors/not-found-err');
 const { requestLogger, errorLogger } = require('./middlewares/logger');
 
-const userRouter = require('./routes/users');
-const movieRouter = require('./routes/movies');
+const userRouter = require('./routes/user');
+const movieRouter = require('./routes/movie');
 
-const { login, createUser } = require('./controllers/users');
+const { login, createUser } = require('./controllers/user');
 const auth = require('./middlewares/auth');
 
 const { PORT = 3000 } = process.env;
