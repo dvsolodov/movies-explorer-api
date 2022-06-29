@@ -20,20 +20,6 @@ const getUser = (req, res, next) => {
     .catch(next);
 };
 
-const getUserById = (req, res, next) => {
-  const { userId } = req.params;
-
-  User.findById(userId)
-    .then((user) => {
-      if (!user) {
-        throw new NotFoundError('Нет данных');
-      }
-
-      res.send(user);
-    })
-    .catch(next);
-};
-
 const createUser = (req, res, next) => {
   const {
     name, email, password,
