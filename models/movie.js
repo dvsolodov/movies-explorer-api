@@ -1,5 +1,5 @@
 const mongoose = require('mongoose');
-const { urlPattern } = require('../utils/constants');
+const { urlPattern, movieYear } = require('../utils/constants');
 
 const movieSchema = new mongoose.Schema({
   country: {
@@ -23,7 +23,7 @@ const movieSchema = new mongoose.Schema({
     required: true,
     validate: {
       validator(v) {
-        return (v.length === 4) && (typeof Number(v) === 'number');
+        return movieYear.test(v);
       },
       message: () => 'Год выпуска фильма должен состоять из четырех цифр',
     },
@@ -31,7 +31,7 @@ const movieSchema = new mongoose.Schema({
   description: {
     type: String,
     minlength: 20,
-    maxlength: 100,
+    maxlength: 1000,
     required: true,
   },
   image: {
@@ -77,7 +77,7 @@ const movieSchema = new mongoose.Schema({
     type: String,
     required: true,
   },
-  nameEn: {
+  nameEN: {
     type: String,
     required: true,
   },
