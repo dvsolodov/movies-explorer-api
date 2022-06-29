@@ -2,7 +2,6 @@ const express = require('express');
 const { celebrate, Joi } = require('celebrate');
 const {
   getUser,
-  getUserById,
   updateUser,
 } = require('../controllers/user');
 const { emailPattern } = require('../utils/constants');

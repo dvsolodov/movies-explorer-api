@@ -123,7 +123,6 @@ const login = async (req, res, next) => {
 module.exports = {
   login,
   getUser,
-  getUserById,
   createUser,
   updateUser,
 };
