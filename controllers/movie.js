@@ -21,7 +21,6 @@ const createMovie = (req, res, next) => {
     director,
     duration,
     year,
-    owner,
     description,
     image,
     trailerLink,
