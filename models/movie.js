@@ -1,16 +1,17 @@
 const mongoose = require('mongoose');
-const {
-  urlPattern,
-  emailPattern
-} = require('../utils/constants');
+const { urlPattern } = require('../utils/constants');
 
 const movieSchema = new mongoose.Schema({
   country: {
     type: String,
+    minlength: 2,
+    maxlength: 30,
     required: true,
   },
   director: {
     type: String,
+    minlength: 2,
+    maxlength: 30,
     required: true,
   },
   duration: {
@@ -20,9 +21,17 @@ const movieSchema = new mongoose.Schema({
   year: {
     type: String,
     required: true,
+    validate: {
+      validator(v) {
+        return (v.length === 4) && (typeof Number(v) === 'number');
+      },
+      message: () => 'Год выпуска фильма должен состоять из четырех цифр',
+    },
   },
   description: {
     type: String,
+    minlength: 20,
+    maxlength: 100,
     required: true,
   },
   image: {
@@ -56,7 +65,8 @@ const movieSchema = new mongoose.Schema({
     },
   },
   owner: {
-    type: String,
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'user',
     required: true,
   },
   movieId: {
