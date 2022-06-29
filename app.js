@@ -68,7 +68,7 @@ app.post('/signup', celebrate({
 
 app.use(auth);
 app.use('/users', userRouter);
-app.use('/movies', moviesRouter);
+app.use('/movies', movieRouter);
 app.use('/', () => {
   throw new NotFoundError('Нет данных');
 });
