@@ -19,7 +19,7 @@ const auth = require('./middlewares/auth');
 const { PORT = 3000 } = process.env;
 const { urlPattern, allowedCors } = require('./utils/constants');
 
-mongoose.connect('mongodb://localhost:27017/bitfilmsdb', {
+mongoose.connect('mongodb://localhost:27017/moviesdb', {
   useNewUrlParser: true,
   useCreateIndex: true,
   useFindAndModify: false,
