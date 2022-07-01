@@ -29,7 +29,7 @@ router.post('/', celebrate({
   }),
 }), createMovie);
 
-router.delete('/_id', celebrate({
+router.delete('/:_id', celebrate({
   params: Joi.object().keys({
     cardId: Joi.string().length(24).hex().required(),
   }),
