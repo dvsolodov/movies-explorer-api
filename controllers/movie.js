@@ -53,7 +53,7 @@ const createMovie = (req, res, next) => {
     })
     .catch((err) => {
       if (err.name === 'ValidationError') {
-        return next(new BadRequestError('Для создания карточки переданы некорректные данные'));
+        return next(new BadRequestError('Для создания фильма переданы некорректные данные'));
       }
 
       return next(err);
@@ -64,14 +64,14 @@ const deleteMovie = (req, res, next) => {
   const { movieId } = req.params;
 
   Movie.findById(movieId)
-    .orFail(() => new NotFoundError('Карточка с таким ID не найдена'))
+    .orFail(() => new NotFoundError('Фильм с таким ID не найден'))
     .then((movie) => {
       if (!movie.owner.equals(req.user._id)) {
-        return next(new ForbiddenError('Нельзя удалять чужие карточки'));
+        return next(new ForbiddenError('Нельзя удалять чужие фильмы'));
       }
 
       return movie.remove()
-        .then(() => res.send({ message: 'Карточка удалена' }));
+        .then(() => res.send({ message: 'Фильм удален' }));
     })
     .catch(next);
 };
