@@ -7,7 +7,7 @@ module.exports = (err, req, res, next) => {
     .status(statusCode)
     .send({
       message: statusCode === 500
-        ? INTERNAL_SERVER_ERR_MSG(err.name, err,message)
+        ? INTERNAL_SERVER_ERR_MSG(err.name, err, message)
         : message,
     });
 

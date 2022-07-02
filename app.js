@@ -4,9 +4,8 @@ const mongoose = require('mongoose');
 const helmet = require('helmet');
 
 const bodyParser = require('body-parser');
-const router = require('./routes/index');
-
 const { errors } = require('celebrate');
+const router = require('./routes/index');
 
 const { requestLogger, errorLogger } = require('./middlewares/logger');
 const corsHandler = require('./middlewares/corsHandler');

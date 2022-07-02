@@ -1,4 +1,5 @@
 const express = require('express');
+
 const router = express.Router();
 
 const {
@@ -8,7 +9,7 @@ const {
 } = require('../controllers/movie');
 const {
   createMovieValidator,
-  deleteMovieValidator
+  deleteMovieValidator,
 } = require('../middlewares/validators');
 
 const uriSegment = '/movies';

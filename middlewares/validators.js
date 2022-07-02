@@ -47,7 +47,7 @@ const deleteMovieValidator = celebrate({
   params: Joi.object().keys({
     movieId: Joi.string().length(24).hex().required(),
   }),
-})
+});
 module.exports = {
   loginValidator,
   registerValidator,

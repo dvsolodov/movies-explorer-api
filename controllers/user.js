@@ -9,7 +9,7 @@ const {
   NOT_FOUND_ERR_MSG,
   INCORRECT_REGISTER_DATA_ERR_MSG,
   INCORRECT_LOGIN_DATA_ERR_MSG,
-  USER_EXISTS_ERR_MSG
+  USER_EXISTS_ERR_MSG,
 } = require('../utils/constants');
 
 const { NODE_ENV, JWT_SECRET } = process.env;

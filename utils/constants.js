@@ -17,9 +17,7 @@ const INCORRECT_DATA_ERR_MSG = 'Для создания фильма перед�
 const INCORRECT_REGISTER_DATA_ERR_MSG = 'Для регистрации переданы некорректные данные';
 const USER_EXISTS_ERR_MSG = 'Пользователь с такой почтой уже зарегистрирован';
 const INCORRECT_LOGIN_DATA_ERR_MSG = 'Неправильные почта или пароль';
-const INTERNAL_SERVER_ERR_MSG = (errName, errMsg) => {
-  return `На сервере произошла ошибка: ${errName} = ${errMsg}`;
-};
+const INTERNAL_SERVER_ERR_MSG = (errName, errMsg) => `На сервере произошла ошибка: ${errName} = ${errMsg}`;
 
 module.exports = {
   urlPattern,
@@ -35,5 +33,5 @@ module.exports = {
   INCORRECT_DATA_ERR_MSG,
   INCORRECT_REGISTER_DATA_ERR_MSG,
   USER_EXISTS_ERR_MSG,
-  INCORRECT_LOGIN_DATA_ERR_MSG
+  INCORRECT_LOGIN_DATA_ERR_MSG,
 };

@@ -6,7 +6,7 @@ const {
   NOT_FOUND_ERR_MSG,
   NOT_FOUND_MOVIE_ERR_MSG,
   DELETE_MOVIE_ERR_MSG,
-  INCORRECT_DATA_ERR_MSG
+  INCORRECT_DATA_ERR_MSG,
 } = require('../utils/constants');
 
 const getMovies = (req, res, next) => {
