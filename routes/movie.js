@@ -1,39 +1,22 @@
 const express = require('express');
-const { celebrate, Joi } = require('celebrate');
+const router = express.Router();
+
 const {
   getMovies,
   createMovie,
   deleteMovie,
 } = require('../controllers/movie');
-const { urlPattern } = require('../utils/constants');
-const uriSegment = '/movies';
+const {
+  createMovieValidator,
+  deleteMovieValidator
+} = require('../middlewares/validators');
 
-const router = express.Router();
+const uriSegment = '/movies';
 
 router.get(`${uriSegment}/`, getMovies);
 
-router.post(`${uriSegment}/`, celebrate({
-  body: Joi.object().keys({
-    country: Joi.string().required().min(2).max(30),
-    director: Joi.string().required().min(2).max(30),
-    duration: Joi.number().required(),
-    year: Joi.number().required().integer(),
-    description: Joi.string().required().min(20).max(1000),
-    image: Joi.string().required().pattern(urlPattern),
-    trailerLink: Joi.string().required().pattern(urlPattern),
-    thumbnail: Joi.string().required().pattern(urlPattern),
-    owner: Joi.string().length(24).hex().optional()
-      .allow(''),
-    movieId: Joi.string(),
-    nameRU: Joi.string().required().min(2).max(255),
-    nameEN: Joi.string().required().min(2).max(255),
-  }),
-}), createMovie);
+router.post(`${uriSegment}/`, createMovieValidator, createMovie);
 
-router.delete(`${uriSegment}/:movieId`, celebrate({
-  params: Joi.object().keys({
-    movieId: Joi.string().length(24).hex().required(),
-  }),
-}), deleteMovie);
+router.delete(`${uriSegment}/:movieId`, deleteMovieValidator, deleteMovie);
 
 module.exports = router;
