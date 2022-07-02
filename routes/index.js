@@ -28,7 +28,7 @@ router.post('/signup', celebrate({
 }), createUser);
 
 router.use(auth, userRouter);
-router.use('/movies', movieRouter);
+router.use(auth, movieRouter);
 
 router.use('/', () => {
   throw new NotFoundError('Нет данных');
