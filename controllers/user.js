@@ -5,6 +5,12 @@ const NotFoundError = require('../errors/not-found-err');
 const BadRequestError = require('../errors/bad-request-err');
 const UnauthorizedError = require('../errors/unauthorized-err');
 const ConflictError = require('../errors/conflict-err');
+const {
+  NOT_FOUND_ERR_MSG,
+  INCORRECT_REGISTER_DATA_ERR_MSG,
+  INCORRECT_LOGIN_DATA_ERR_MSG,
+  USER_EXISTS_ERR_MSG
+} = require('../utils/constants');
 
 const { NODE_ENV, JWT_SECRET } = process.env;
 
@@ -12,7 +18,7 @@ const getUser = (req, res, next) => {
   User.findById(req.user._id)
     .then((user) => {
       if (!user) {
-        throw new NotFoundError('Нет данных');
+        throw new NotFoundError(NOT_FOUND_ERR_MSG);
       }
 
       res.send(user);
@@ -34,7 +40,7 @@ const createUser = (req, res, next) => {
       )
         .then((user) => {
           if (!user) {
-            throw new NotFoundError('Нет данных');
+            throw new NotFoundError(NOT_FOUND_ERR_MSG);
           }
 
           const responseUser = {
@@ -48,11 +54,11 @@ const createUser = (req, res, next) => {
         })
         .catch((err) => {
           if (err.code === 11000) {
-            return next(new ConflictError('Пользователь с такой почтой уже зарегистрирован'));
+            return next(new ConflictError(USER_EXISTS_ERR_MSG));
           }
 
           if (err.name === 'ValidationError') {
-            return next(new BadRequestError('Для регистрации переданы некорректные данные'));
+            return next(new BadRequestError(INCORRECT_REGISTER_DATA_ERR_MSG));
           }
 
           return next(err);
@@ -72,7 +78,7 @@ const updateUser = (req, res, next) => {
   )
     .then((user) => {
       if (!user) {
-        throw new NotFoundError('Нет данных');
+        throw new NotFoundError(NOT_FOUND_ERR_MSG);
       }
 
       res.send(user)
@@ -80,7 +86,7 @@ const updateUser = (req, res, next) => {
     })
     .catch((err) => {
       if (err.name === 'ValidationError') {
-        return next(new BadRequestError('Для регистрации переданы некорректные данные'));
+        return next(new BadRequestError(INCORRECT_REGISTER_DATA_ERR_MSG));
       }
 
       return next(err);
@@ -94,14 +100,14 @@ const login = async (req, res, next) => {
     .select('+password')
     .then((user) => {
       if (!user) {
-        throw new UnauthorizedError('Неправильные почта или пароль');
+        throw new UnauthorizedError(INCORRECT_LOGIN_DATA_ERR_MSG);
       }
 
       return bcrypt.compare(password, user.password)
         .then((matched) => {
           if (!matched) {
             console.log(matched);
-            throw new UnauthorizedError('Неправильные почта или пароль');
+            throw new UnauthorizedError(INCORRECT_LOGIN_DATA_ERR_MSG);
           }
 
           const token = jwt.sign(

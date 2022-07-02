@@ -1,11 +1,13 @@
-module.exports = errorHandler = (err, req, res, next) => {
+const { INTERNAL_SERVER_ERR_MSG } = require('../utils/constants');
+
+module.exports = (err, req, res, next) => {
   const { statusCode = 500, message } = err;
 
   res
     .status(statusCode)
     .send({
       message: statusCode === 500
-        ? `На сервере произошла ошибка: ${err.name} = ${err.message}`
+        ? INTERNAL_SERVER_ERR_MSG(err.name, err,message)
         : message,
     });
 
