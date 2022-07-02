@@ -7,10 +7,11 @@ const bodyParser = require('body-parser');
 const router = require('./routes/index');
 
 const { errors } = require('celebrate');
-const { requestLogger, errorLogger } = require('./middlewares/logger');
 
-const errorHandler = require('./utils/errorHandler');
-const corsHandler = require('./utils/corsHandler');
+const { requestLogger, errorLogger } = require('./middlewares/logger');
+const corsHandler = require('./middlewares/corsHandler');
+const errorHandler = require('./middlewares/errorHandler');
+
 
 const { PORT = 3000 } = process.env;
 
