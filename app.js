@@ -4,20 +4,14 @@ const express = require('express');
 const app = express();
 const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
-const { celebrate, Joi } = require('celebrate');
 
 const { errors } = require('celebrate');
-const NotFoundError = require('./errors/not-found-err');
 const { requestLogger, errorLogger } = require('./middlewares/logger');
 
-const userRouter = require('./routes/user');
-const movieRouter = require('./routes/movie');
-
-const { login, createUser } = require('./controllers/user');
-const auth = require('./middlewares/auth');
-
 const { PORT = 3000 } = process.env;
-const { urlPattern, allowedCors } = require('./utils/constants');
+const { allowedCors } = require('./utils/constants');
+
+const router = require('./routes/index');
 
 mongoose.connect('mongodb://localhost:27017/moviesdb', {
   useNewUrlParser: true,
@@ -49,29 +43,7 @@ app.use((req, res, next) => {
 
 app.use(requestLogger);
 
-app.post('/signin', celebrate({
-  body: Joi.object().keys({
-    email: Joi.string().required().email(),
-    password: Joi.string().required(),
-  }),
-}), login);
-
-app.post('/signup', celebrate({
-  body: Joi.object().keys({
-    email: Joi.string().required().email(),
-    password: Joi.string().required(),
-    name: Joi.string().min(2).max(30),
-    about: Joi.string().min(2).max(30),
-    avatar: Joi.string().pattern(urlPattern),
-  }),
-}), createUser);
-
-app.use(auth);
-app.use('/users', userRouter);
-app.use('/movies', movieRouter);
-app.use('/', () => {
-  throw new NotFoundError('Нет данных');
-});
+app.use('/', router);
 
 app.use(errorLogger);
 
