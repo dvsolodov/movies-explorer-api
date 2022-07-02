@@ -7,11 +7,11 @@ const {
   updateUser,
 } = require('../controllers/user');
 const { emailPattern } = require('../utils/constants');
-const baseUri = 'users';
+const uriSegment = '/users';
 
-router.get("${baseUri}/me", getUser);
+router.get(`${uriSegment}/me`, getUser);
 
-router.patch("${baseUri}/me", celebrate({
+router.patch(`${uriSegment}/me`, celebrate({
   body: Joi.object().keys({
     name: Joi.string().required().min(2).max(30),
     email: Joi.string().required().pattern(emailPattern),

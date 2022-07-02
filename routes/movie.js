@@ -6,12 +6,13 @@ const {
   deleteMovie,
 } = require('../controllers/movie');
 const { urlPattern } = require('../utils/constants');
+const uriSegment = '/movies';
 
 const router = express.Router();
 
-router.get('/', getMovies);
+router.get(`${uriSegment}/`, getMovies);
 
-router.post('/', celebrate({
+router.post(`${uriSegment}/`, celebrate({
   body: Joi.object().keys({
     country: Joi.string().required().min(2).max(30),
     director: Joi.string().required().min(2).max(30),
@@ -29,7 +30,7 @@ router.post('/', celebrate({
   }),
 }), createMovie);
 
-router.delete('/:movieId', celebrate({
+router.delete(`${uriSegment}/:movieId`, celebrate({
   params: Joi.object().keys({
     movieId: Joi.string().length(24).hex().required(),
   }),
