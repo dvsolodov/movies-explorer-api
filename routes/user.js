@@ -1,16 +1,17 @@
 const express = require('express');
+const router = express.Router();
+
 const { celebrate, Joi } = require('celebrate');
 const {
   getUser,
   updateUser,
 } = require('../controllers/user');
 const { emailPattern } = require('../utils/constants');
+const baseUri = 'users';
 
-const router = express.Router();
+router.get("${baseUri}/me", getUser);
 
-router.get('/me', getUser);
-
-router.patch('/me', celebrate({
+router.patch("${baseUri}/me", celebrate({
   body: Joi.object().keys({
     name: Joi.string().required().min(2).max(30),
     email: Joi.string().required().pattern(emailPattern),
