@@ -1,8 +1,8 @@
 require('dotenv').config();
 const express = require('express');
-
-const app = express();
 const mongoose = require('mongoose');
+const helmet = require('helmet');
+
 const bodyParser = require('body-parser');
 const router = require('./routes/index');
 
@@ -11,10 +11,10 @@ const { errors } = require('celebrate');
 const { requestLogger, errorLogger } = require('./middlewares/logger');
 const corsHandler = require('./middlewares/corsHandler');
 const errorHandler = require('./middlewares/errorHandler');
+const limiter = require('./middlewares/limiter');
 
-
+const app = express();
 const { PORT = 3000 } = process.env;
-
 
 mongoose.connect('mongodb://localhost:27017/moviesdb', {
   useNewUrlParser: true,
@@ -27,6 +27,10 @@ app.use(bodyParser.json());
 app.use(corsHandler);
 
 app.use(requestLogger);
+
+app.use(helmet());
+
+app.use(limiter);
 
 app.use('/', router);
 
