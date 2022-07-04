@@ -13,7 +13,7 @@ const errorHandler = require('./middlewares/errorHandler');
 const limiter = require('./middlewares/limiter');
 
 const app = express();
-const { PORT = 3000, MONGO_URL } = process.env;
+const { PORT = 3000, MONGO_URL = 'mongodb://localhost:27017/moviesdb' } = process.env;
 
 mongoose.connect(MONGO_URL, {
   useNewUrlParser: true,
