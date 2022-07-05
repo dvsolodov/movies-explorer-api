@@ -3,6 +3,7 @@ const NotFoundError = require('../errors/not-found-err');
 const BadRequestError = require('../errors/bad-request-err');
 const ForbiddenError = require('../errors/forbidden-err');
 const {
+  DELETE_MOVIE_MSG,
   NOT_FOUND_ERR_MSG,
   NOT_FOUND_MOVIE_ERR_MSG,
   DELETE_MOVIE_ERR_MSG,
@@ -77,7 +78,7 @@ const deleteMovie = (req, res, next) => {
       }
 
       return movie.remove()
-        .then(() => res.send({ message: 'Фильм удален' }));
+        .then(() => res.send({ message: DELETE_MOVIE_MSG }));
     })
     .catch(next);
 };
