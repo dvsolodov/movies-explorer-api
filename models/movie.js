@@ -70,8 +70,14 @@ const movieSchema = new mongoose.Schema({
     required: true,
   },
   movieId: {
-    type: String,
+    type: Number,
     required: true,
+    validate: {
+      validator(v) {
+        return Number.isInteger(v);
+      },
+      message: (props) => 'ID фильма со стороннего ресурса должен быть целым числом!',
+    },
   },
   nameRU: {
     type: String,
