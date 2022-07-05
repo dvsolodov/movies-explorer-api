@@ -9,6 +9,8 @@ const allowedCors = [
   'http://localhost:3000',
 ];
 
+const LOGIN_SUCCESSFUL_MSG = 'Успешный вход в систему';
+const DELETE_MOVIE_MSG = 'Фильм удален';
 const NOT_FOUND_ERR_MSG = 'Нет данных';
 const NOT_FOUND_MOVIE_ERR_MSG = 'Фильм с таким ID не найден';
 const UNAUTHORIZED_ERR_MSG = 'Необходима авторизация';
@@ -25,6 +27,8 @@ module.exports = {
   emailPattern,
   movieYear,
   allowedCors,
+  LOGIN_SUCCESSFUL_MSG,
+  DELETE_MOVIE_MSG,
   NOT_FOUND_ERR_MSG,
   UNAUTHORIZED_ERR_MSG,
   INTERNAL_SERVER_ERR_MSG,
