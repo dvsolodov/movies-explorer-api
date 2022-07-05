@@ -111,7 +111,6 @@ const login = async (req, res, next) => {
       return bcrypt.compare(password, user.password)
         .then((matched) => {
           if (!matched) {
-            console.log(matched);
             throw new UnauthorizedError(INCORRECT_LOGIN_DATA_ERR_MSG);
           }
 

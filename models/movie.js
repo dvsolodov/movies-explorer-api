@@ -76,7 +76,7 @@ const movieSchema = new mongoose.Schema({
       validator(v) {
         return Number.isInteger(v);
       },
-      message: (props) => 'ID фильма со стороннего ресурса должен быть целым числом!',
+      message: () => 'ID фильма со стороннего ресурса должен быть целым числом!',
     },
   },
   nameRU: {
