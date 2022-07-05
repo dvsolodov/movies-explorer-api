@@ -31,7 +31,7 @@ const createMovieValidator = celebrate({
     director: Joi.string().required().min(2).max(30),
     duration: Joi.number().required(),
     year: Joi.number().required().integer(),
-    description: Joi.string().required().min(20).max(1000),
+    description: Joi.string().required(),
     image: Joi.string().required().pattern(urlPattern),
     trailerLink: Joi.string().required().pattern(urlPattern),
     thumbnail: Joi.string().required().pattern(urlPattern),
