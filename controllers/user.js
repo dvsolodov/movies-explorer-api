@@ -6,6 +6,7 @@ const BadRequestError = require('../errors/bad-request-err');
 const UnauthorizedError = require('../errors/unauthorized-err');
 const ConflictError = require('../errors/conflict-err');
 const {
+  LOGIN_SUCCESSFUL_MSG,
   NOT_FOUND_ERR_MSG,
   INCORRECT_REGISTER_DATA_ERR_MSG,
   INCORRECT_LOGIN_DATA_ERR_MSG,
@@ -89,6 +90,10 @@ const updateUser = (req, res, next) => {
         return next(new BadRequestError(INCORRECT_REGISTER_DATA_ERR_MSG));
       }
 
+      if (err.name === 'MongoError') {
+        return next(new ConflictError(USER_EXISTS_ERR_MSG));
+      }
+
       return next(err);
     });
 };
@@ -117,7 +122,7 @@ const login = async (req, res, next) => {
           );
 
           res.send({
-            message: 'Успешный вход в систему',
+            message: LOGIN_SUCCESSFUL_MSG,
             token,
           })
             .end();
