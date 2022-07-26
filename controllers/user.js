@@ -131,6 +131,7 @@ const login = async (req, res, next) => {
 
           res.send({
             message: LOGIN_SUCCESSFUL_MSG,
+            user,
             token,
           })
             .end();
