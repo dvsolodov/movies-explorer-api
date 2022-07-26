@@ -50,7 +50,16 @@ const createUser = (req, res, next) => {
             email: user.email,
           };
 
-          res.send(responseUser)
+          const token = jwt.sign(
+            { _id: user._id },
+            NODE_ENV === 'production' ? JWT_SECRET : 'dev-secret',
+            { expiresIn: 3600 },
+          );
+
+          res.send({
+              user:responseUser,
+              token
+          	})
             .end();
         })
         .catch((err) => {
