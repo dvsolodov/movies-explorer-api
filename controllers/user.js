@@ -123,6 +123,12 @@ const login = async (req, res, next) => {
             throw new UnauthorizedError(INCORRECT_LOGIN_DATA_ERR_MSG);
           }
 
+          const responseUser = {
+            _id: user._id,
+            name: user.name,
+            email: user.email,
+          };
+
           const token = jwt.sign(
             { _id: user._id },
             NODE_ENV === 'production' ? JWT_SECRET : 'dev-secret',
@@ -131,7 +137,7 @@ const login = async (req, res, next) => {
 
           res.send({
             message: LOGIN_SUCCESSFUL_MSG,
-            user,
+            user: responseUser,
             token,
           })
             .end();
