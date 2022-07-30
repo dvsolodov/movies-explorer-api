@@ -11,7 +11,7 @@ const {
 } = require('../utils/constants');
 
 const getMovies = (req, res, next) => {
-  Movie.find({})
+  Movie.find({owner: req.user._id})
     .then((movies) => {
       if (!movies) {
         throw new NotFoundError(NOT_FOUND_ERR_MSG);
