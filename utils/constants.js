@@ -4,8 +4,8 @@ const emailPattern = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+")
 const movieYear = /^\d{4}$/;
 
 const allowedCors = [
-  'https://solodov-dplm.students.nomoredomains.xyz/',
-  'http://solodov-dplm.students.nomoredomains.xyz/',
+  'https://solodov-dplm.students.nomoredomains.xyz',
+  'http://solodov-dplm.students.nomoredomains.xyz',
   'http://localhost:3000',
   'http://localhost:3001',
 ];
